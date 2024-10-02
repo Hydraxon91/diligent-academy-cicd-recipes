@@ -32,17 +32,13 @@ function createContainer({ onShow }) {
   return container;
 }
 
-export function setupApp(root) {
-  
-  let isVisible = false;
-  
+export function setupApp(root) {  
   function handleShow(event) {
     const list = event.target.parentNode.querySelector('#recipeList');
 
     list.innerHTML = '';
 
     const recipes = getRecipes();
-    
     
     if (recipes && recipes.length > 0) {
       recipes.forEach(recipe => {
@@ -59,7 +55,6 @@ export function setupApp(root) {
     } else {
       list.innerHTML = '<p>No recipes available.</p>'; // Handle case with no recipes
     }
-
 
   }
 
