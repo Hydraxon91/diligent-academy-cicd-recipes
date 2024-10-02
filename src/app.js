@@ -37,15 +37,30 @@ export function setupApp(root) {
   let isVisible = false;
   
   function handleShow(event) {
-    isVisible = !isVisible;
     const list = event.target.parentNode.querySelector('#recipeList');
+
+    list.innerHTML = '';
+
+    const recipes = getRecipes();
     
     
-    if (isVisible) {      
-      list?.appendChild(element('p', {}, ['Recipe List']));
+    if (recipes && recipes.length > 0) {
+      recipes.forEach(recipe => {
+        // Create a card for each recipe
+        const card = `
+          <div class="card" style="width: 18rem; margin: 10px;">
+            <div class="card-body">
+              <h5 class="card-title">${recipe.name}</h5>
+            </div>
+          </div>
+        `;
+        list.innerHTML += card; // Append the card to the recipe list
+      });
     } else {
-      list.innerText = '';
+      list.innerHTML = '<p>No recipes available.</p>'; // Handle case with no recipes
     }
+
+
   }
 
   root.appendChild(createContainer({ onShow: handleShow }))
